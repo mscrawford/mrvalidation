@@ -24,9 +24,9 @@ calcValidGridNutrientLossesAWMS <- function(nutrient = c("nr", "c")) {
   awmsShare          <- collapseNames(calcOutput("AWMSconfShr",
                                                  aggregate = FALSE)[, past, "constant"])
 
-  emissionFactorsN   <- toolIso2CellCountries(emissionFactorsN, cells = "lpjcell")
-  lossRatesC         <- toolIso2CellCountries(lossRatesC, cells = "lpjcell")
-  awmsShare <- toolIso2CellCountries(awmsShare, cells = "lpjcell")
+  emissionFactorsN   <- toolIso2CellCountries(emissionFactorsN)
+  lossRatesC         <- toolIso2CellCountries(lossRatesC)
+  awmsShare          <- toolIso2CellCountries(awmsShare)
 
   fuel <- excretion[, , "fuel"]
 
