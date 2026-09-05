@@ -61,7 +61,7 @@ readGlobalCarbonBudget <- function() {
     }
 
     modelData <- eluc |>
-      dplyr::select(dplyr::all_of(unname(selectedCols))) |>
+      dplyr::select(dplyr::all_of(names(eluc)[unname(selectedCols)])) |>
       dplyr::slice(-1)
 
     names(modelData) <- names(componentMap)
@@ -85,7 +85,7 @@ readGlobalCarbonBudget <- function() {
          length(peatCol), " - check the GCB.xlsx 'Land-Use Change Emissions' sheet layout.")
   }
   peatData <- eluc |>
-    dplyr::select(dplyr::all_of(peatCol)) |>
+    dplyr::select(dplyr::all_of(names(eluc)[peatCol])) |>
     dplyr::slice(-1)
   names(peatData) <- "Emissions|CO2|Land|Land-use Change|+|Peatland"
   peatData <- dplyr::bind_cols(yearData, peatData) |>
