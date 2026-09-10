@@ -20,7 +20,7 @@
 
 calcValidGCBcountry <- function() {
 
-  # Mt C/yr -> Mt CO2/yr
+  # C -> CO2 via the molar-mass ratio 44/12 (M(CO2) = 44, M(C) = 12 g/mol); Mt C/yr -> Mt CO2/yr
   x <- readSource("GCBcountry", convert = TRUE) * 44 / 12
 
   # honest model labels (Houghton & Nassikas vintage kept as H&N; the World cloud labels its
@@ -34,8 +34,8 @@ calcValidGCBcountry <- function() {
   for (code in names(modelNames)) {
     m <- collapseNames(x[, , code], collapsedim = "model")
     getNames(m) <- paste0(components[getNames(m)], " (Mt CO2/yr)")
-    m <- add_dimension(m, dim = 3.1, add = "scenario", nm = "historical")
-    m <- add_dimension(m, dim = 3.2, add = "model", nm = modelNames[[code]])
+    m <- addDim(m, dim = 3.1, dimName = "scenario", item = "historical")
+    m <- addDim(m, dim = 3.2, dimName = "model", item = modelNames[[code]])
     out <- mbind(out, m)
   }
   names(dimnames(out))[3] <- "scenario.model.variable"

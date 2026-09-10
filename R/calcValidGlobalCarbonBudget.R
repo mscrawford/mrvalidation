@@ -73,7 +73,7 @@ calcValidGlobalCarbonBudget <- function(cumulative = FALSE) {
   peatVar <- "Emissions|CO2|Land|Land-use Change|+|Peatland"
   exclVar <- "Emissions|CO2|Land|Land-use Change|Excl Peatland"
   bkModels <- c("GCB", "BLUE", "H&C2023", "OSCAR")
-  peat <- magclass::collapseNames(allOut[, , peatVar])   # GCB's common peat term (only GCB carries peatVar)
+  peat <- collapseNames(allOut[, , peatVar])   # GCB's common peat term (only GCB carries peatVar)
   # per-model peat child (matches MAgPIE +|Peatland) and Excl Peatland (net - peat). Select each model via its
   # sub-dimension (allOut carries "model" as sub-dim 3.1) and rename the variable sub-dim (3.2), so the new
   # items inherit allOut's structure and no model prefix is embedded in a name string.
@@ -83,15 +83,15 @@ calcValidGlobalCarbonBudget <- function(cumulative = FALSE) {
     net   <- allOut[, , m][, , lucVar]
     peatM <- net
     peatM[, , ] <- peat[, , ]
-    magclass::getNames(peatM, dim = 2) <- peatVar
+    getNames(peatM, dim = 2) <- peatVar
     exclM <- net
     exclM[, , ] <- net[, , ] - peat[, , ]
-    magclass::getNames(exclM, dim = 2) <- exclVar
-    peatChild <- magclass::mbind(peatChild, peatM)
-    excl      <- magclass::mbind(excl, exclM)
+    getNames(exclM, dim = 2) <- exclVar
+    peatChild <- mbind(peatChild, peatM)
+    excl      <- mbind(excl, exclM)
   }
   allOut <- allOut[, , peatVar, invert = TRUE]   # drop GCB-only peat memo; re-add as a child for all four models
-  allOut <- magclass::mbind(allOut, peatChild, excl)
+  allOut <- mbind(allOut, peatChild, excl)
 
   allOut <- add_dimension(allOut, dim = 3.1, add = "scenario", nm = "historical")
 
