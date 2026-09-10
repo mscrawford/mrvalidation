@@ -181,6 +181,10 @@ fullVALIDATION <- function(rev = 0.1, aggregate = "region+global") {
   calcOutput(type = "ValidLandChange", datasource = "SSPResults", baseyear = 2005, # 1995 not available as baseyear
              aggregate = aggregate, file = valfile, append = TRUE, warnNA = FALSE, try = TRUE) # ready
 
+  # Tree Cover Loss by driver
+  calcOutput(type = "ValidTreeCoverLoss", datasource = "GFW", aggregate = aggregate,
+             file = valfile, append = TRUE, warnNA = FALSE, try = TRUE) # ready
+
   # WaterUsage
   calcOutput(type = "ValidWaterUsage", datasource = "foley_2011", aggregate = FALSE,
              file = "validation.mif", append = TRUE, try = TRUE)
