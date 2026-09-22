@@ -2,16 +2,9 @@
 #'
 #' @description Observed annual tree cover loss by dominant driver, for model validation.
 #'
-#' @details All eight classes are returned, including the seven module 35 does not take as
-#' input. Only shifting cultivation reaches \code{f35_forest_lost_share} (an age-class reset
-#' with regrowth, not a land-use transition). Permanent agriculture corresponds to MAgPIE's
-#' land conversion (\code{vm_lu_transitions}), logging to its timber harvest
-#' (\code{v35_hvarea_*}), settlements to the exogenous urban land of module 34; hard
-#' commodities (mining, energy infrastructure) have no MAgPIE counterpart. Unknown is kept so
-#' the classes sum. Wildfire and other natural disturbances are natural, not land use.
-#'
-#' This is UMD/Hansen tree cover loss, not FAO forest loss, with each 1 km cell assigned one
-#' dominant driver: an order-of-magnitude and pattern check against MAgPIE pools, not a target.
+#' @details This is UMD/Hansen tree cover loss, not FAO forest loss, with each 1 km cell assigned
+#' one dominant driver. All eight classes are returned, although only shifting cultivation reaches
+#' module 35 (\code{f35_forest_lost_share}): an order-of-magnitude and pattern check, not a target.
 #'
 #' @param datasource Currently only \code{"GFW"} (WRI/Google DeepMind drivers of tree cover
 #' loss, Sims et al. 2025, crossed with UMD/Hansen annual loss via the GFW data-api).
